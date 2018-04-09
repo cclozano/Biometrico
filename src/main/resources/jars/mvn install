@@ -1,0 +1,6 @@
+AbsoluteLayout.jar
+FDxSDKPro.jar
+FDxSDKPro_jdk1.5_0_21.jar
+FDxSDKPro_jdk1.6.0_45.jar
+
+mvn install:install-file -Dfile=src/main/resources/jars/FDxSDKPro.jar -DgroupId=com.local -DartifactId=FDxSDKPro -Dversion=1.0 -Dpackaging=jar
