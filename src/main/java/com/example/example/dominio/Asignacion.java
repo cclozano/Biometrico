@@ -1,5 +1,6 @@
 package com.example.example.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,7 @@ public class Asignacion extends EntidadBase{
 
     private boolean activo;
 
+    @JsonIgnore
     @ManyToOne
     private Persona persona;
 

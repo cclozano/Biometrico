@@ -1,6 +1,7 @@
 package com.example.example.ui;
 
 import com.example.example.datos.PersonaRepository;
+import com.example.example.dominio.Articulo;
 import com.example.example.dominio.Asignacion;
 import com.example.example.dominio.Persona;
 import com.example.example.servicios.ServicioAsignacion;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -40,10 +42,10 @@ public class PersonaView extends BaseView<Persona> {
         super(repository);
         toolBar.addDerecha(verInfo);
         verInfo.addClickListener(clickEvent -> {
-           Window w = new Window();
-           Button desasociarButton = new Button("Desasociar",FontAwesome.UNDO);
+            Window w = new Window();
+            Button desasociarButton = new Button("Desasociar",FontAwesome.UNDO);
 
-           desasociarButton.setEnabled(false);
+            desasociarButton.setEnabled(false);
             TextField tfNombre = new TextField("Nombre: ",selectedBean.getNombre());
             tfNombre.setEnabled(false);
             TextField tfI = new TextField("C.I: ",selectedBean.getIdentificacion());
@@ -53,6 +55,7 @@ public class PersonaView extends BaseView<Persona> {
             Grid<Asignacion> grid = new Grid<>(Asignacion.class);
             grid.setItems(selectedBean.getAsignacions());
             grid.removeAllColumns();
+            grid.addColumn(Asignacion::getId).setCaption("Id");
             grid.addColumn(Asignacion::getArticulo).setCaption("Articulo");
             grid.addColumn(Asignacion::getFechaAsignacion).setCaption("Fecha Asignacion");
             grid.addColumn(Asignacion::getFechaEliminacion).setCaption("Fecha Desasociado");
@@ -60,10 +63,10 @@ public class PersonaView extends BaseView<Persona> {
             VerticalLayout vl = new VerticalLayout(contenido,grid);
 
             grid.asSingleSelect().addValueChangeListener(e ->
-                    {
-                        desasociarButton.setEnabled(e.getValue() != null && e.getValue().isActivo());
-                        asignacion = e.getValue();
-                    });
+            {
+                desasociarButton.setEnabled(e.getValue() != null && e.getValue().isActivo());
+                asignacion = e.getValue();
+            });
             desasociarButton.addClickListener(clickEvent1 -> {
                 ConfirmDialog.show(UI.getCurrent(),
                         "Confirmar",
@@ -78,10 +81,10 @@ public class PersonaView extends BaseView<Persona> {
                             }
                         });
             });
-           w.setContent(vl);
-           w.setModal(true);
-           w.center();
-           UI.getCurrent().addWindow(w);
+            w.setContent(vl);
+            w.setModal(true);
+            w.center();
+            UI.getCurrent().addWindow(w);
         });
         verInfo.setEnabled(false);
         dataGrid.asSingleSelect().addValueChangeListener(e ->
@@ -115,9 +118,10 @@ public class PersonaView extends BaseView<Persona> {
         if(personasGrid ==null)
         {
             personasGrid = new Grid<>();
+            Grid.Column codColumn = personasGrid.addColumn(fac -> fac.getId()).setCaption("Id");
             Grid.Column idColumn = personasGrid.addColumn(fac -> fac.getIdentificacion()).setCaption("Identificacion");
             Grid.Column nombreColumn = personasGrid.addColumn(fac -> fac.getNombre()).setCaption("Nombre");
-            
+
 
 
             HeaderRow filterRow = personasGrid.appendHeaderRow();
@@ -145,9 +149,9 @@ public class PersonaView extends BaseView<Persona> {
                             .contains(identificacionFilter.getValue().toLowerCase());
                 });
             });
-        return personasGrid;
-    }
-    return  null;
+            return personasGrid;
+        }
+        return  null;
     }
 
     @Override

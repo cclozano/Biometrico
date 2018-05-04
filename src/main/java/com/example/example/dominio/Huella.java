@@ -1,8 +1,8 @@
 package com.example.example.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
@@ -27,6 +27,7 @@ public class Huella extends  EntidadBase{
     private int imageQuality = 0;
 
 
+    @JsonIgnore
     @ManyToOne
     private Persona persona;
 
