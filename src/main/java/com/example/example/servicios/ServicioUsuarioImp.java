@@ -68,4 +68,11 @@ public class ServicioUsuarioImp implements ServicioUsuario{
 
         return false;
     }
+
+    @Override
+    public Usuario findById(long id) {
+        Usuario u = new UsuarioComun();
+        ((UsuarioComun) u).setNombreCompleto("Carlos Lozano");
+        return u;
+    }
 }

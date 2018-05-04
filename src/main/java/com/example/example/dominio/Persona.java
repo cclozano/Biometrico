@@ -2,17 +2,25 @@ package com.example.example.dominio;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+
 @Entity
 @Getter @Setter
 public class Persona extends  EntidadBase{
 
     private String nombre;
+    private String segundoNombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private  String identificacion;
+
+
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(length=100000)
+    private byte[] foto ;
 
     public Persona() {
 

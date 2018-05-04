@@ -1,13 +1,10 @@
 package com.example.example.ui;
 
 import com.example.example.infraestructura.DeviceController;
-import com.example.example.infraestructura.InfraestructuraException;
-import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +21,7 @@ public class ConfigView extends VerticalLayout implements View {
 
     public ConfigView()
     {
-        this.addComponent(ledButton);
+        /*this.addComponent(ledButton);
 
         ledButton.addClickListener(clickEvent -> {
             try {
@@ -34,7 +31,7 @@ public class ConfigView extends VerticalLayout implements View {
                 e.printStackTrace();
                 Notification.show( "Error - " + e.getMessage(), Notification.Type.ERROR_MESSAGE);
             }
-        });
+        });*/
     }
 
 }

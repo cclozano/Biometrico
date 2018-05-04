@@ -4,7 +4,6 @@ import com.example.example.datos.HuellaRespository;
 import com.example.example.dominio.Huella;
 import com.example.example.dominio.Persona;
 import com.example.example.infraestructura.DeviceController;
-import com.example.example.infraestructura.DeviceControllerImp;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

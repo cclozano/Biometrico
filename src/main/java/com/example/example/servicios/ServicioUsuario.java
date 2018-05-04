@@ -11,5 +11,6 @@ public interface ServicioUsuario {
     Usuario getUsuario();
     void crearUsuarioComun(UsuarioComun usuarioComun) throws ServiceException;
     boolean recuperarCredenciales(String identificacion, String correo);
+    Usuario findById(long id);
 
 }

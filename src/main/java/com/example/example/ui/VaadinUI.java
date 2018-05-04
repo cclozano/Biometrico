@@ -4,14 +4,10 @@ import com.example.example.datos.HuellaRespository;
 import com.example.example.datos.PersonaRepository;
 import com.example.example.dominio.Huella;
 import com.example.example.dominio.Persona;
-import com.example.example.infraestructura.DeviceControllerImp;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.*;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -39,8 +35,7 @@ public class VaadinUI extends UI {
     @Autowired
     HuellaRespository huellaRespository;
 
-	@Autowired
-    DeviceControllerImp controller;
+
 
 	@Autowired
 	public VaadinUI(PersonaRepository repo, PersonaEditor editor) {
@@ -95,7 +90,7 @@ public class VaadinUI extends UI {
 			/*Grid.Column<Huella, ThemeResource> imageColumn = grid.addColumn(
 					huella -> new ThemeResource("img/"+Huella::getImageJpg+".jpg"),
 					new ImageRenderer());*/
-			gridHuella.addColumn(Huella::getcalidad).setCaption("Calidad");
+			//gridHuella.addColumn(Huella::getcalidad).setCaption("Calidad");
 
 
 			verContent.addComponent(gridHuella);

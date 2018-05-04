@@ -1,15 +1,13 @@
 package com.example.example.ui;
 
 import com.example.example.dominio.EntidadBase;
-import com.example.example.dominio.Persona;
 import com.example.example.servicios.ServicioUsuario;
-import com.example.example.ui.componentes.ExitView;
 import com.example.example.ui.componentes.ToolBar;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.*;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.components.grid.FooterRow;
 import org.springframework.beans.factory.annotation.Autowired;

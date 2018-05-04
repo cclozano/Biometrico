@@ -59,7 +59,7 @@ public class PersonaEditor extends VerticalLayout {
 	public PersonaEditor(PersonaRepository repository, DeviceController controller) {
 	    this.controller = controller;
         try {
-            controller.inicializarUSB();
+            //controller.inicializarUSB();
         } catch (Exception e) {
             Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
         }
@@ -67,7 +67,7 @@ public class PersonaEditor extends VerticalLayout {
 		this.huellas = new Grid<>(Huella.class);
 		huellas.removeAllColumns();
 		huellas.addColumn(Huella::getId).setCaption("ID");
-		huellas.addColumn(Huella::getCalidad).setCaption("Calidad");
+		//huellas.addColumn(Huella::getCalidad).setCaption("Calidad");
         removeFinger.setEnabled(false);
         huellas.asSingleSelect().addValueChangeListener(e -> {
             if(e.getValue() != null)
@@ -144,8 +144,8 @@ public class PersonaEditor extends VerticalLayout {
         StreamResource.StreamSource imagesource  = new MyImageSource(buff);
         StreamResource resource =
                 new StreamResource(imagesource, "myimage.png");
-        float l = huella.getcalidad();
-        this.bar.setValue(l);
+        //float l = huella.getcalidad();
+        //this.bar.setValue(l);
 		this.imagenHuellaLayout.removeComponent(imagen);
 		this.imagen = new Image("",resource);
 		this.imagenHuellaLayout.addComponent(imagen);

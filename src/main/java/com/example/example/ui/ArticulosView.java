@@ -85,7 +85,7 @@ public class ArticulosView extends BaseView<Articulo> {
     public void init()
     {
         try {
-            controller.inicializarUSB();
+            //controller.inicializarUSB();
         } catch (Exception e) {
             e.printStackTrace();
             Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
@@ -118,9 +118,9 @@ public class ArticulosView extends BaseView<Articulo> {
                     StreamResource.StreamSource imagesource  = new MyImageSource(buff);
                     StreamResource resource =
                             new StreamResource(imagesource, "myimage.png");
-                    float l = huella.getcalidad();
+                    //float l = huella.getcalidad();
                     progressBar.setIndeterminate(false);
-                    progressBar.setValue(l);
+                    //progressBar.setValue(l);
                     progressBar.setCaption("% Calidad");
                     imagen = new Image("",resource);
                     imagenHuellaLayout.addComponents(progressBar, imagen,nombre,new Button("Asignar",e -> {
@@ -178,9 +178,9 @@ public class ArticulosView extends BaseView<Articulo> {
                         StreamResource.StreamSource imagesource  = new MyImageSource(buff);
                         StreamResource resource =
                                 new StreamResource(imagesource, "myimage.png");
-                        float l = huella.getcalidad();
+                        //float l = huella.getcalidad();
                         progressBar.setIndeterminate(false);
-                        progressBar.setValue(l);
+                        //progressBar.setValue(l);
                         progressBar.setCaption("% Calidad");
                         imagen = new Image("",resource);
                         persona = servicioHuella.encontrarPersona(huella);

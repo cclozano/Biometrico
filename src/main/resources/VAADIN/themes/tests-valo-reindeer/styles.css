@@ -612,7 +612,7 @@
  * A list of colors for custom event colors. Can be an empty list of you don't 
  * need any custom event colors.
  * 
- * @example javascript
+ * @com.example.example javascript
  * // Java code
  * // 'event' is an instance of EditableCalendarEvent
  * event.setStyleName("color1"); // 1st color in the list

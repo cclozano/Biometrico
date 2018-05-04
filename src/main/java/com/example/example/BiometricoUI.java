@@ -223,6 +223,7 @@ public class BiometricoUI extends UI implements ViewDisplay{
 
         OptionMenu optionPersona = new OptionMenu(FontAwesome.SMILE_O, PersonaView.VIEW_NAME,"Personas");
         OptionMenu optionArticulo = new OptionMenu(FontAwesome.PENCIL, ArticulosView.VIEW_NAME,"Articulos");
+        OptionMenu optionTest = new OptionMenu(FontAwesome.SMILE_O, TestView.VIEW_NAME,"Test");
         OptionMenu optionconfig = new OptionMenu(FontAwesome.GEARS, ConfigView.VIEW_NAME,"Ajustes");
         ArrayList<OptionMenu> menus = new ArrayList<>();
 
@@ -233,6 +234,7 @@ public class BiometricoUI extends UI implements ViewDisplay{
                 menus.add(optionPersona);
                 menus.add(optionArticulo);
                 menus.add(optionconfig);
+                menus.add(optionTest);
                 break;
             case REGISTRADOR:
                 menus.add(optionPersona);

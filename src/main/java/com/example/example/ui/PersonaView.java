@@ -1,7 +1,6 @@
 package com.example.example.ui;
 
 import com.example.example.datos.PersonaRepository;
-import com.example.example.dominio.Articulo;
 import com.example.example.dominio.Asignacion;
 import com.example.example.dominio.Persona;
 import com.example.example.servicios.ServicioAsignacion;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
