@@ -6,6 +6,7 @@ import com.vaadin.client.UIDL;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentConnector;
 import com.vaadin.shared.ui.Connect;
+import org.vaadin.applet.AppletIntegration;
 
 import java.util.logging.Logger;
 

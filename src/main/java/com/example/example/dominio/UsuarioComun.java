@@ -1,5 +1,6 @@
 package com.example.example.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,16 +16,12 @@ import javax.validation.constraints.Size;
 @Getter @Setter
 @Entity
 @Table(name = "USUARIO_COMUN")
-public class UsuarioComun extends EntidadBase implements Usuario {
+public class UsuarioComun extends Persona implements Usuario {
 
     @NotNull
     @Size(min = 4)
     @Column(name = "NOMBRE_USUARIO",length = 15, unique = true)
     private String nombreUsuario = "usuario";
-    @NotNull
-    @Size(min = 10, max = 15)
-    @Column(name = "IDENTIFICACION",length = 15,unique = true)
-    private String identificacion = "9999999999";
     @NotNull
     @Size(min = 4,max = 15)
     @Column(name = "PASSWORD",length = 25)
@@ -33,17 +30,19 @@ public class UsuarioComun extends EntidadBase implements Usuario {
     @Size(min = 4,max=50)
     @Column(name = "CORREO",length = 25)
     private String correo = "correo@dominio.com";
-    @NotNull
-    @Size(min = 4,max = 50)
-    @Column(name = "NOMBRE_COMPLETO",length =50)
-    private String nombreCompleto = "Nombre Completo";
 
+
+    @Override
+    public String getNombreCompleto() {
+        return getNombre() + " " + getSegundoNombre() + " " + getApellidoPaterno() + " " + getApellidoMaterno();
+    }
 
     @Override
     public TipoUsuario getTipoUsuario() {
         return TipoUsuario.REGISTRADOR;
     }
 
+    @JsonIgnore
     @Override
     public String getUsuario() {
         return nombreUsuario;

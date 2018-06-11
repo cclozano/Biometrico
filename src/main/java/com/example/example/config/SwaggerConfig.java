@@ -11,6 +11,7 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @EnableSwagger2
@@ -20,7 +21,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         return new Docket(DocumentationType.SWAGGER_2)
                 //.host("http://localhost:8080")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.com.example.example.com.example.example.apirest"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.example.apirest"))
                 //.paths(regex("/usuario.*"))
                 //.paths(regex("/persona.*"))
                 .build()

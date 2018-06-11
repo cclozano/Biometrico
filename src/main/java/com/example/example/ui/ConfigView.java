@@ -1,10 +1,13 @@
 package com.example.example.ui;
 
 import com.example.example.infraestructura.DeviceController;
+import com.example.example.infraestructura.InfraestructuraException;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 

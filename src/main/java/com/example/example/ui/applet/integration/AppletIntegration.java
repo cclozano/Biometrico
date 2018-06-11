@@ -5,6 +5,7 @@ import com.vaadin.server.PaintTarget;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.LegacyComponent;
+import org.vaadin.applet.client.ui.VAppletIntegration;
 
 import java.util.Collections;
 import java.util.HashMap;

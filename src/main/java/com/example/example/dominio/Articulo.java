@@ -1,10 +1,10 @@
 package com.example.example.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 @Getter @Setter
@@ -13,7 +13,11 @@ public class Articulo extends  EntidadBase{
 
     private  String codigo;
     private  String descripcion;
+    private String numeroSerie;
+    private String modelo;
+    private String fabricante;
 
+    @JsonIgnore
     @OneToOne
     private Asignacion asignacion;
 

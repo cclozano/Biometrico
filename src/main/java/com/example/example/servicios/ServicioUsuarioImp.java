@@ -1,8 +1,12 @@
 package com.example.example.servicios;
 
+import com.example.example.datos.UsuarioRepository;
 import com.example.example.dominio.Usuario;
 import com.example.example.dominio.UsuarioComun;
+import com.example.example.exceptions.AuthException;
+import com.example.example.exceptions.ServiceException;
 import com.vaadin.ui.UI;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,13 +15,14 @@ public class ServicioUsuarioImp implements ServicioUsuario{
 
     private String usuarioAdmin = "admin";
 
-    private String claveAdmin = "admin.123";
+    private String claveAdmin = "admin";
 
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
 
-    public Usuario autenticar(String usuario, String clave){
-
+    public Usuario autenticar(String usuario, String clave) throws AuthException {
         if(usuario.equals(usuarioAdmin) && clave.equals(claveAdmin))
         {
             Usuario u = new Usuario() {
@@ -41,10 +46,15 @@ public class ServicioUsuarioImp implements ServicioUsuario{
                     return TipoUsuario.ADMINISTRADOR;
                 }
             };
-            setUsuario(u);
+            //setUsuario(u);
             return u;
         }
-       return  null;
+        UsuarioComun u = usuarioRepository.findByNombreUsuario(usuario);
+        if(u==null) throw new AuthException("Usuario no existe");
+        if(u.getPassword().equals(clave)) return u;
+        else throw new AuthException("Clave incorrecta");
+
+
     }
 
     private void setUsuario(Usuario usuario)
@@ -55,6 +65,16 @@ public class ServicioUsuarioImp implements ServicioUsuario{
     public Usuario getUsuario()
     {
        return (Usuario) UI.getCurrent().getSession().getAttribute("usuario");
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        usuarioRepository.delete(id);
+    }
+
+    @Override
+    public Usuario actualizat(Usuario usuario) {
+        return null;
     }
 
     @Override
@@ -72,7 +92,7 @@ public class ServicioUsuarioImp implements ServicioUsuario{
     @Override
     public Usuario findById(long id) {
         Usuario u = new UsuarioComun();
-        ((UsuarioComun) u).setNombreCompleto("Carlos Lozano");
+        ((UsuarioComun) u).setNombre("Carlos Lozano");
         return u;
     }
 }

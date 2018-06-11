@@ -1,9 +1,5 @@
 package com.example.example.infraestructura;
 
-/**
- * Created by max on 09/06/17.
- */
-
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration;
@@ -19,13 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-//@ConfigurationProperties(prefix = "spring.jpa.eclipselink")
 @Configuration
 public class EclipseLinkJpaConfig extends JpaBaseConfiguration {
-
-    private Boolean weaving;
-
-    private String ddlGeneration;
 
     @Autowired
     public EclipseLinkJpaConfig(DataSource dataSource, JpaProperties properties, ObjectProvider<JtaTransactionManager> jtaTransactionManager, ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
@@ -46,22 +37,4 @@ public class EclipseLinkJpaConfig extends JpaBaseConfiguration {
         map.put("eclipselink.logging.level.sql","FINE");
         return map;
     }
-
-    /*public Boolean getWeaving() {
-        return weaving;
-    }
-
-    public void setWeaving(Boolean weaving) {
-        this.weaving = weaving;
-    }
-
-    public String getDdlGeneration() {
-        return ddlGeneration;
-    }
-
-    public void setDdlGeneration(String ddlGeneration) {
-        this.ddlGeneration = ddlGeneration;
-    }*/
-
-
 }

@@ -1,5 +1,6 @@
 package com.example.example.dominio;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,11 +15,18 @@ public class Asignacion extends EntidadBase{
 
     @Temporal(value = TemporalType.TIMESTAMP)
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
     private Date fechaAsignacion;
     @Temporal(value = TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
     private Date fechaEliminacion;
 
     private boolean activo;
+
+
+
+    private String novedadesAsignacion;
+    private String novedadesDevolucion;
 
     @JsonIgnore
     @ManyToOne

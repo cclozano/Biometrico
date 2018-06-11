@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla" pageWidth="680" pageHeight="842" columnWidth="655" leftMargin="15" rightMargin="10" topMargin="10" bottomMargin="10" uuid="ba5fecc9-d30e-4602-9190-1aca41de1d81">
+	<property name="ireport.zoom" value="1.3310000000000184"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.wrap.text" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.auto.fit.row" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.auto.fit.column" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.freeze.row" value="3"/>
+	<property name="net.sf.jasperreports.exports.xls.font.size.fix.enabled" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.sheet.names.all" value="Data/Footnotes"/>
+	<property name="net.sf.jasperreports.page.break.no.pagination" value="apply"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="true"/>
+	<parameter name="TIPO" class="java.lang.String"/>
+	<parameter name="FECHA_DESDE" class="java.lang.String"/>
+	<parameter name="FECHA_HASTA" class="java.lang.String"/>
+	<parameter name="P_TITULO" class="java.lang.String"/>
+	<parameter name="P_SUBTITULO" class="java.lang.String"/>
+	<parameter name="LOGO_URL" class="java.lang.String"/>
+	<field name="bean" class="com.example.example.dominio.Asignacion">
+		<fieldDescription><![CDATA[_THIS]]></fieldDescription>
+	</field>
+	<title>
+		<band height="14" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="112">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement key="textField" x="562" y="65" width="89" height="13" uuid="2acae60e-5a7b-4d8d-bd36-ae8c66b43dc5"/>
+				<textElement verticalAlignment="Top">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="0" width="492" height="32" uuid="027ce292-be5d-4c85-8a6b-23c77f3f11a6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Comprobante de devolucion"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="562" y="78" width="16" height="13" uuid="4a9c62a4-95b8-444b-8374-992366a3edf1"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="596" y="78" width="22" height="13" uuid="5fdc1ab2-e799-468d-9873-b78f83aa24f1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="481" y="65" width="77" height="13" uuid="e7613a96-3566-45f0-9219-0235f17cca82"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Emisión: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="78" width="77" height="13" uuid="7627e484-bdae-40e3-a4ed-8580c24876f5"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Página: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="579" y="78" width="17" height="13" uuid="f0aaba18-568f-4aaf-a478-8d31990dc4ba"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="91" width="135" height="20" uuid="4078448d-9c3e-4741-ab72-c1c31bb6aba7">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="6" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[NOVEDADES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="350" y="91" width="60" height="20" uuid="eaf0dae1-9ce2-4d85-bd7d-8b9e73e17738">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="6" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="91" width="151" height="20" uuid="278a4254-80fa-4b18-b984-61b8098135cc">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="6" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ARTICULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="91" width="187" height="20" uuid="45b85102-d087-4eb1-99d4-a0035d63a127">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[AGENTE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="128" splitType="Stretch">
+			<elementGroup/>
+			<textField>
+				<reportElement x="410" y="20" width="135" height="20" uuid="2d1aa90f-dde3-40bf-9ff1-a32a9f7fa431"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bean}.isActivo()? "SI" : "NO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="20" width="60" height="20" uuid="3a77b6ff-86d9-4f92-98ea-70540108ba05"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bean}.getFechaAsignacion()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="20" width="151" height="20" uuid="1c702ed9-440a-478c-8b82-b085e564544a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bean}.getArticulo()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="20" width="187" height="20" uuid="55d93dad-c200-4933-85bc-a661f684a0a1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bean}.getPersona()]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="10" width="664" height="1" uuid="cd142edb-ce8d-49f7-b0b9-52b6f753cd2a"/>
+			</break>
+			<line>
+				<reportElement key="line" x="45" y="98" width="100" height="1" uuid="0db4ec13-765c-4dcc-92c3-242a11b06747"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText" x="31" y="99" width="128" height="13" uuid="11efb0fd-19db-4166-bbdd-f633fe328bcf"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Revisado Por]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="390" y="98" width="128" height="13" uuid="9215b4a5-a0ca-41a1-b61e-a472aabcfb6d"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Aprobado Por]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="401" y="97" width="100" height="1" uuid="d2db8317-1873-4383-8fc8-e01e4286f833"/>
+			</line>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="165"/>
+	</lastPageFooter>
+	<summary>
+		<band height="9" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -42,10 +42,10 @@ public class PersonaView extends BaseView<Persona> {
         super(repository);
         toolBar.addDerecha(verInfo);
         verInfo.addClickListener(clickEvent -> {
-            Window w = new Window();
-            Button desasociarButton = new Button("Desasociar",FontAwesome.UNDO);
+           Window w = new Window();
+           Button desasociarButton = new Button("Desasociar",FontAwesome.UNDO);
 
-            desasociarButton.setEnabled(false);
+           desasociarButton.setEnabled(false);
             TextField tfNombre = new TextField("Nombre: ",selectedBean.getNombre());
             tfNombre.setEnabled(false);
             TextField tfI = new TextField("C.I: ",selectedBean.getIdentificacion());
@@ -63,10 +63,10 @@ public class PersonaView extends BaseView<Persona> {
             VerticalLayout vl = new VerticalLayout(contenido,grid);
 
             grid.asSingleSelect().addValueChangeListener(e ->
-            {
-                desasociarButton.setEnabled(e.getValue() != null && e.getValue().isActivo());
-                asignacion = e.getValue();
-            });
+                    {
+                        desasociarButton.setEnabled(e.getValue() != null && e.getValue().isActivo());
+                        asignacion = e.getValue();
+                    });
             desasociarButton.addClickListener(clickEvent1 -> {
                 ConfirmDialog.show(UI.getCurrent(),
                         "Confirmar",
@@ -76,15 +76,15 @@ public class PersonaView extends BaseView<Persona> {
                         confirmDialog -> {
                             if(confirmDialog.isConfirmed())
                             {
-                                servicioAsignacion.desasociar(asignacion);
+                                servicioAsignacion.desasociar(asignacion,"Devolviendo");
                                 grid.setItems(selectedBean.getAsignacions());
                             }
                         });
             });
-            w.setContent(vl);
-            w.setModal(true);
-            w.center();
-            UI.getCurrent().addWindow(w);
+           w.setContent(vl);
+           w.setModal(true);
+           w.center();
+           UI.getCurrent().addWindow(w);
         });
         verInfo.setEnabled(false);
         dataGrid.asSingleSelect().addValueChangeListener(e ->
@@ -121,7 +121,7 @@ public class PersonaView extends BaseView<Persona> {
             Grid.Column codColumn = personasGrid.addColumn(fac -> fac.getId()).setCaption("Id");
             Grid.Column idColumn = personasGrid.addColumn(fac -> fac.getIdentificacion()).setCaption("Identificacion");
             Grid.Column nombreColumn = personasGrid.addColumn(fac -> fac.getNombre()).setCaption("Nombre");
-
+            
 
 
             HeaderRow filterRow = personasGrid.appendHeaderRow();
@@ -149,9 +149,9 @@ public class PersonaView extends BaseView<Persona> {
                             .contains(identificacionFilter.getValue().toLowerCase());
                 });
             });
-            return personasGrid;
-        }
-        return  null;
+        return personasGrid;
+    }
+    return  null;
     }
 
     @Override

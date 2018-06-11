@@ -47,6 +47,9 @@ public class PersonaEditor extends VerticalLayout {
     VerticalLayout imagenHuellaLayout = new VerticalLayout();
     Image imagen = new Image();
 
+	VerticalLayout fotoLayout = new VerticalLayout();
+	Image foto = new Image();
+
 
     Button addFinger = new Button("Agregar", FontAwesome.FIGHTER_JET);
     Button removeFinger = new Button("Eliminar ", FontAwesome.REMOVE);
@@ -102,7 +105,7 @@ public class PersonaEditor extends VerticalLayout {
         });
 
 
-        camposLayout.addComponents(nombre, identificacion, actions);
+        camposLayout.addComponents(nombre, identificacion,fotoLayout, actions);
         bar.setCaption("% Calidad");
 		imagenHuellaLayout.addComponents(imagen,bar);
 		huellasLayout.addComponents(botonesHuellasLayout,huellas);
@@ -110,6 +113,8 @@ public class PersonaEditor extends VerticalLayout {
 
 		addComponent(mainLayout);
 		binder.bindInstanceFields(this);
+
+
 
 
 		setSpacing(true);
@@ -183,6 +188,23 @@ public class PersonaEditor extends VerticalLayout {
 		save.focus();
 
 		nombre.selectAll();
+
+
+        if(persona!=null && persona.getFoto() != null)
+        {
+            BufferedImage buff = null;
+            try {
+                buff = ImageIO.read(new ByteArrayInputStream(this.persona.getFoto()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            StreamResource.StreamSource imagesource  = new MyImageSource(buff);
+            StreamResource resource =
+                    new StreamResource(imagesource, "myimage.png");
+            this.fotoLayout.removeComponent(foto);
+            this.foto = new Image("",resource);
+            this.fotoLayout.addComponent(foto);
+        }
 	}
 
 	public void setChangeHandler(ChangeHandler h) {

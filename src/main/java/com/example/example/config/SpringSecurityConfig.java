@@ -13,6 +13,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private AuthenticationEntryPoint authEntryPoint;
+
+
+	@Autowired
+	private CustomAuthenticationProvider authProvider;
+
+	public SpringSecurityConfig() {
+		super();
+	}
+
+	@Override
+	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authProvider);
+	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -24,15 +37,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 
-	@Autowired
+	/*@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER");
 	}
-
+*/
 
 	private static final String[] AUTH_WHITELIST = {
-
-			// -- swagger ui
 			"/swagger-resources/**",
 			"/swagger-ui.html",
 			"/v2/api-docs",

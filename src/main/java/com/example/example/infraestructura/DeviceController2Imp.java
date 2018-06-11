@@ -41,29 +41,6 @@ public class DeviceController2Imp implements  DeviceController {
 
     @Override
     public Huella verificarHuella(long nivelSeguridad, Huella huella, Collection<Huella> huellas) throws InfraestructuraException {
-        /*long iError,ierrorTemplate;
-        boolean[] matched = new boolean[1];
-        matched[0] = false;
-        ierrorTemplate = fplib.CreateTemplate(huella.getHuellaInfo().getInfo(), huella.getImageBuffer(), huella.getRegMin());
-        if (ierrorTemplate == SGFDxErrorCode.SGFDX_ERROR_NONE)
-        {
-            for (Huella h :
-                    huellas) {
-                ierrorTemplate = fplib.CreateTemplate(h.getHuellaInfo().getInfo(), h.getImageBuffer(), h.getRegMin());
-                if (ierrorTemplate == SGFDxErrorCode.SGFDX_ERROR_NONE) {
-                    iError = fplib.MatchTemplate(huella.getRegMin(), h.getRegMin(), nivelSeguridad, matched);
-                    if (iError == SGFDxErrorCode.SGFDX_ERROR_NONE)
-                    {
-                        if (matched[0])
-                            return h;
-                    }
-                    else throw new InfraestructuraException("Verification Attempt 1 Fail - MatchTemplate() Error : " + iError);
-                } else throw new InfraestructuraException("verificarHuella() Error : " + ierrorTemplate);
-            }
-        }
-        else throw  new InfraestructuraException("verificarHuella() Error : " + ierrorTemplate);
-        throw new InfraestructuraException("Huella no identificada");*/
-
 
         FingerprintTemplate probe = new FingerprintTemplate()
                 .dpi(500)
@@ -71,7 +48,6 @@ public class DeviceController2Imp implements  DeviceController {
 
         for(Huella h : huellas)
         {
-
             FingerprintTemplate candidate = new FingerprintTemplate()
                     .dpi(500)
                     .create(h.getImageJpg());
@@ -82,11 +58,6 @@ public class DeviceController2Imp implements  DeviceController {
             boolean matches = score >= threshold;
             if (matches) return h;
         }
-
-
-
-
-
         return huella;
     }
 

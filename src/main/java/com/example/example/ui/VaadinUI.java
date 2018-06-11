@@ -4,14 +4,18 @@ import com.example.example.datos.HuellaRespository;
 import com.example.example.datos.PersonaRepository;
 import com.example.example.dominio.Huella;
 import com.example.example.dominio.Persona;
+import com.vaadin.annotations.Theme;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.*;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
-
+@Theme("tests-valo-dark")
 public class VaadinUI extends UI {
 
 	private final PersonaRepository repo;

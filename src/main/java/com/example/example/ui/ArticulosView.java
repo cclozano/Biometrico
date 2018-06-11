@@ -15,6 +15,7 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.*;
 import com.vaadin.ui.components.grid.HeaderRow;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.vaadin.dialogs.ConfirmDialog;
 
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
@@ -41,8 +42,7 @@ public class ArticulosView extends BaseView<Articulo> {
     @Autowired
     PersonaRepository personaRepository;
 
-    @Autowired
-    DeviceController controller;
+
 
     @Autowired
     ServicioHuella servicioHuella;
@@ -100,14 +100,43 @@ public class ArticulosView extends BaseView<Articulo> {
             VerticalLayout imagenHuellaLayout = new VerticalLayout();
             imagen = new Image();
             progressBar.setIndeterminate(true);
-            aw.setContent(progressBar);
+
+
+            VerticalLayout main = new VerticalLayout();
+            TextField iden = new TextField("Identificacion");
+            Button asoc = new Button("OK",clickEvent1 -> {
+                persona =personaRepository.findByIdentificacion(iden.getValue());
+                if(persona==null)Notification.show("No se encuentra la persona ", Notification.Type.ERROR_MESSAGE);
+                ConfirmDialog.show(UI.getCurrent(),
+                        "Confirmar",
+                        "Desea asociar el articulo a "+persona+"?",
+                        "Aceptar",
+                        "Cancelar",
+                        confirmDialog -> {
+                            if(confirmDialog.isConfirmed())
+                            {
+                                try {
+                                    servicioAsignacion.asignar(selectedBean,persona);
+                                    Notification.show("se asigno " + selectedBean.getDescripcion() + " a " + persona.getNombre(), Notification.Type.ERROR_MESSAGE);
+                                    aw.close();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                    Notification.show(e1.getMessage(), Notification.Type.ERROR_MESSAGE);
+                                    aw.close();
+                                }
+                            }
+                        });
+            });
+            main.addComponents(progressBar,iden,asoc);
+
+
+            aw.setContent(main);
             aw.setModal(true);
             UI.getCurrent().addWindow(aw);
             aw.addFocusListener(fl -> {
                 if(!estaCapturando){
                 try {
                     estaCapturando = true;
-                    huella = controller.capturar(5,50);
                     if (huella == null) return;
                     BufferedImage buff = null;
                     try {
@@ -160,14 +189,50 @@ public class ArticulosView extends BaseView<Articulo> {
             VerticalLayout imagenHuellaLayout = new VerticalLayout();
             imagen = new Image();
             progressBar.setIndeterminate(true);
-            aw.setContent(progressBar);
+
+            VerticalLayout main = new VerticalLayout();
+            TextField iden = new TextField("Identificacion");
+            Button asoc = new Button("OK",clickEvent1 -> {
+                persona =personaRepository.findByIdentificacion(iden.getValue());
+                if(persona==null)Notification.show("No se identifica la persona ", Notification.Type.ERROR_MESSAGE);
+                ConfirmDialog.show(UI.getCurrent(),
+                        "Confirmar",
+                        "Desea desasociar el articulo de "+persona+" ?",
+                        "Aceptar",
+                        "Cancelar",
+                        confirmDialog -> {
+                            if(confirmDialog.isConfirmed())
+                            {
+                                try {
+                                    if (persona!=null && selectedBean.getAsignacion()!=null && persona.getId() == selectedBean.getAsignacion().getPersona().getId())
+                                    {
+                                        servicioAsignacion.desasociar(selectedBean.getAsignacion(),"Devolucion");
+                                        Notification.show("se desasocio " + selectedBean.getDescripcion() + " de " + persona.getNombre(), Notification.Type.ERROR_MESSAGE);
+                                    }
+                                    else if(persona== null){
+                                        Notification.show("No se identifica la huella ", Notification.Type.ERROR_MESSAGE);
+                                    }
+                                    else {
+                                        Notification.show("La huella ingresada corresponde a " + persona.getNombre() + " -- No es la asignada!", Notification.Type.ERROR_MESSAGE);
+                                    }
+                                    aw.close();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                    Notification.show(e1.getMessage(), Notification.Type.ERROR_MESSAGE);
+                                    aw.close();
+                                }
+                            }
+                        });
+            });
+            main.addComponents(progressBar,iden,asoc);
+            aw.setContent(main);
             aw.setModal(true);
             UI.getCurrent().addWindow(aw);
             aw.addFocusListener(fl -> {
                 if(!estaCapturando){
                     try {
                         estaCapturando = true;
-                        huella = controller.capturar(5,50);
+
                         if (huella == null) return;
                         BufferedImage buff = null;
                         try {
@@ -188,7 +253,7 @@ public class ArticulosView extends BaseView<Articulo> {
                             try {
                                 if (persona!=null && selectedBean.getAsignacion()!=null && persona.getId() == selectedBean.getAsignacion().getPersona().getId())
                                 {
-                                    servicioAsignacion.desasociar(selectedBean.getAsignacion());
+                                    servicioAsignacion.desasociar(selectedBean.getAsignacion(),"Devolucion app");
                                     Notification.show("se desasocio " + selectedBean.getDescripcion() + " de " + persona.getNombre(), Notification.Type.ERROR_MESSAGE);
                                 }
                                 else if(persona== null){

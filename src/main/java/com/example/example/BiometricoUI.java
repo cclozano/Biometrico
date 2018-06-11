@@ -1,6 +1,8 @@
 package com.example.example;
 
 import com.example.example.dominio.Usuario;
+import com.example.example.exceptions.AuthException;
+import com.example.example.exceptions.ServiceException;
 import com.example.example.servicios.ServicioUsuario;
 import com.example.example.ui.*;
 import com.example.example.ui.componentes.DefaultView;
@@ -9,6 +11,7 @@ import com.example.example.ui.componentes.LoginView;
 import com.example.example.ui.componentes.OptionMenu;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.*;
@@ -28,7 +31,7 @@ import java.util.TimeZone;
  * Created by max on 09/06/17.
  */
 @SpringUI
-@Theme("valo")
+@Theme("tests-valo-dark")
 //@Theme("dashboard")
 @Title("Asignacion Biometrica")
 @SpringViewDisplay
@@ -83,7 +86,7 @@ public class BiometricoUI extends UI implements ViewDisplay{
 
     private void loadRoot()
     {
-        setTheme("tests-valo-facebook");
+        //setTheme("tests-valo-facebook");
         root.setWidth("100%");
         root.addMenu(buildMenu());
         Notification.show("Hola","Bienvenido(a) " +
@@ -98,13 +101,19 @@ public class BiometricoUI extends UI implements ViewDisplay{
         if(loginView ==null) {
             loginView = new LoginView((usuario, clave) -> {
 
-                if(this.servicioUsuario.autenticar(usuario,clave)!=null)
-                {
-                    loadRoot();
-                }
-                else {
-                    Notification.show("Usuario o Clave Incorrectas");
+                try {
+                    Usuario usuario1 = this.servicioUsuario.autenticar(usuario,clave);
+                    if(usuario1!=null)
+                    {
+                        UI.getCurrent().getSession().setAttribute("usuario",usuario1);
+                        loadRoot();
+                    }
+                    else {
+                        Notification.show("Usuario o Clave Incorrectas");
 
+                    }
+                } catch (AuthException e) {
+                    Notification.show(e.getMessage());
                 }
             },this.servicioUsuario);
 
@@ -205,6 +214,22 @@ public class BiometricoUI extends UI implements ViewDisplay{
             menuItemsLayout.addComponent(b);
             count++;
         }
+
+
+        MenuBar.MenuItem tema = settings.addItem("Temas",VaadinIcons.TOOLS,null);
+        tema.addItem("Default",menuItem -> setTheme("tests-valo"));
+        tema.addItem("Blueprint",menuItem -> setTheme("tests-valo-blueprint"));
+        tema.addItem("Dark",menuItem -> setTheme("tests-valo-dark"));
+        tema.addItem("Facebook",menuItem -> setTheme("tests-valo-facebook"));
+        tema.addItem("Flat dark",menuItem -> setTheme("tests-valo-flatdark"));
+        tema.addItem("Flat",menuItem -> setTheme("tests-valo-flat"));
+        tema.addItem("Light",menuItem -> setTheme("tests-valo-light"));
+        tema.addItem("Metro",menuItem -> setTheme("tests-valo-metro"));
+        tema.addItem("Migrate Reindeer",menuItem -> setTheme("tests-valo-reindeer"));
+
+
+
+
         return menu;
     }
 
@@ -224,7 +249,7 @@ public class BiometricoUI extends UI implements ViewDisplay{
         OptionMenu optionPersona = new OptionMenu(FontAwesome.SMILE_O, PersonaView.VIEW_NAME,"Personas");
         OptionMenu optionArticulo = new OptionMenu(FontAwesome.PENCIL, ArticulosView.VIEW_NAME,"Articulos");
         OptionMenu optionTest = new OptionMenu(FontAwesome.SMILE_O, TestView.VIEW_NAME,"Test");
-        OptionMenu optionconfig = new OptionMenu(FontAwesome.GEARS, ConfigView.VIEW_NAME,"Ajustes");
+        OptionMenu optionconfig = new OptionMenu(FontAwesome.GEARS, ReportesView.VIEW_NAME,"Reportes");
         ArrayList<OptionMenu> menus = new ArrayList<>();
 
         Usuario usuario = this.servicioUsuario.getUsuario();
